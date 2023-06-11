@@ -6,6 +6,10 @@ main:
 
 all: Test_01 Test_02 Test_03 Test_04
 
+Test_05: mkcache wrapper 05_rand.s
+	ca65 -t nes -o $(CACHE)05_rand.o 05_rand.s
+	ld65 -t nes -o 05_rand.nes $(CACHE)wrapper.o $(CACHE)05_rand.o
+
 Test_04: mkcache wrapper 04_Test.s
 	ca65 -t nes -o $(CACHE)04_Test.o 04_Test.s
 	ld65 -t nes -o 04_Test.nes $(CACHE)wrapper.o $(CACHE)04_Test.o
