@@ -2,4 +2,6 @@
 *.fdb
 # NES ROM files
 *.nes
+# Build files
+cache/
 
