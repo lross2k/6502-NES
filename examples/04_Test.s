@@ -4,8 +4,8 @@
 
 .proc Main
   ; Set the values
-  ldx #100  ; Load X with #100
-  ldy #00   ; Load Y with #00
+  ldx #$64  ; Load X with 100
+  ldy #$00   ; Load Y with 00
   stx $0100 ; Store health onto $0000
 
 ; Start code loop
@@ -16,12 +16,12 @@ loop:
   stx $0100 ; Store the health back
 
   lda $0100 ; Load health onto accumulator
-  cmp #00   ; Compare health to 0
-  beq loop  ; Repeat loop
+  cmp #$00   ; Compare health to 0
+  bne loop  ; Repeat loop
 
 ; End the code instead
 end:
-  ldy #42
+  ldy #$2A
   rts
 
 .endproc

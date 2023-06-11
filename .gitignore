@@ -1,0 +1,5 @@
+# Fceux debugging files
+*.fdb
+# NES ROM files
+*.nes
+

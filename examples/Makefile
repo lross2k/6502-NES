@@ -1,19 +1,23 @@
-04_Test: wrapper
+main:
+	$(info ********  Luis Ross' 6502-NES learning  ********)
+	$(info use make Test_XX from Test_01 up to Test_04 )
+
+Test_04: wrapper
 	ca65 -t nes -o 04_Test.o 04_Test.s
 	ld65 -t nes -o 04_Test.nes wrapper.o 04_Test.o
 	rm wrapper.o 04_Test.o
 
-03_16bit: wrapper
+Test_03: wrapper
 	ca65 -t nes -o 03_16bit.o 03_16bit.s
 	ld65 -t nes -o 03_16bit.nes wrapper.o 03_16bit.o
 	rm wrapper.o 03_16bit.o
 
-02_RAM: wrapper
+Test_02: wrapper
 	ca65 -t nes -o 02_RAM.o 02_RAM.s
 	ld65 -t nes -o 02_RAM.nes wrapper.o 02_RAM.o
 	rm wrapper.o 02_RAM.o
 
-01_XandY: wrapper
+Test_01: wrapper
 	ca65 -t nes -o 01_XandY.o 01_XandY.s
 	ld65 -t nes -o 01_XandY.nes wrapper.o 01_XandY.o
 	rm wrapper.o 01_XandY.o
