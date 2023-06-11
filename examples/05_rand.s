@@ -1,43 +1,36 @@
-seed = $11
-
 .export Main
 .segment "CODE"
 
 .proc Main
+    ldx #$09
+    stx $0600
 loop:
     jsr rndrss
-    ldx #0
     jmp loop
-
     rts
 
 rndrss:
-    ; ROM data starts at $8000
     ; Read upper boundary from $0600
     ; Save random number at $0601
-    ; Apply bitmask 10101010
+    ; Save last result at $0602
     ; Run 7 cycles of modifications
-    ldx #$07
+    ldx #$00
 rndrss_loop:
     lda $8000,X
-    and #%10101010
+    inx
+    ; Loop if the value is greater than limit
+    clc
+    cmp $0600
+    bcs rndrss_loop
+    ; Loop unless reached iteration limit
+    cpx #$14
+    beq rndrss_end
+    ; Loop if the number equals last one
+    cmp $0602 
+    beq rndrss_loop 
+rndrss_end:
     sta $0601
-    dex
-    jmp rndrss_loop
-    rts
-
-galois8:
-    ldy #8
-    lda seed+0
-:
-    asl
-    bcc :+
-    eor #$1D
-:
-    dey
-    bne :--
-    sta seed+0
-    cmp #0
+    sta $0602
     rts
 
 .endproc
