@@ -4,7 +4,11 @@ main:
 	$(info ********  Luis Ross' 6502-NES learning  ********)
 	$(info use make Test_XX from Test_01 up to Test_04 )
 
-all: Test_01 Test_02 Test_03 Test_04
+all: Test_01 Test_02 Test_03 Test_04 Test_05 Test_06
+
+Test_06: mkcache wrapper 06_TicTacToe.s
+	ca65 -t nes -o $(CACHE)06_TicTacToe.o 06_TicTacToe.s
+	ld65 -t nes -o 06_TicTacToe.nes $(CACHE)wrapper.o $(CACHE)06_TicTacToe.o
 
 Test_05: mkcache wrapper 05_rand.s
 	ca65 -t nes -o $(CACHE)05_rand.o 05_rand.s
