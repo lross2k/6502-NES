@@ -7,21 +7,16 @@
 loop:
     jsr rndrss
     jmp loop
-    rts
 
 rndrss:
     ; Read upper boundary from $0600
     ; Save random number at $0601
     ; Save last result at $0602
-    ; Run 7 cycles of modifications
     ldx #$00
 rndrss_loop:
     lda $8000,X
+    and $0600
     inx
-    ; Loop if the value is greater than limit
-    clc
-    cmp $0600
-    bcs rndrss_loop
     ; Loop unless reached iteration limit
     cpx #$14
     beq rndrss_end
